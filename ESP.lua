@@ -366,7 +366,7 @@
             --  object.drawing.race_label.Visible = Settigs.race;
             --  object.drawing.rank_label.Visible = Settigs.rank;
 
-            object.drawing.rc_label.Text = '[RC:'..tostring(object.rcCells)..']'; 
+            object.drawing.rc_label.Text = 'RC '..tostring(object.rcCells); 
             object.drawing.rc_label.Color = Settigs.rcColor; 
 
             local Race = player.Character:FindFirstChild('Race') and player.Character:FindFirstChild('Race').Value
@@ -390,10 +390,10 @@
              if rankValue > 0 then 
                 local rankdata = RankingData[Race] and RankingData[Race][rankValue]
                 if rankdata and rankdata.RankName then 
-                    object.drawing.rank_label.Text = "[Rank:"..tostring(rankValue).."]" --.." "..tostring(rankdata.RankName).."]"
+                    object.drawing.rank_label.Text = "Rank "..tostring(rankValue) --.." "..tostring(rankdata.RankName).."]"
                 end;
             else 
-                object.drawing.rank_label.Text = "[Rank 0]"
+                object.drawing.rank_label.Text = "Rank 0"
              end;
 
              object.drawing.rank_label.Color = Settigs.rankColor
