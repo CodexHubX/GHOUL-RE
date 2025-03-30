@@ -462,6 +462,14 @@
         };
         
         local function updater()
+
+            if not object.Toggle and object.connections.updater then 
+                object.connections.updater:Disconnect();
+                object.connections.updater = nil;
+                object.drawing.label.Visible = false;
+                return;
+            end;
+
             if not object.instance then return end;
             local distance = LocalPlayer:DistanceFromCharacter(object.instance.Position);
             local settigs = object.Settigs;
@@ -502,24 +510,16 @@
     
         function object.Enabled(value)
             if not value then 
-                -- if not object.connections.updater then 
-                --     object.drawing.label.Visible = false;
-                --     return;
-                -- end;
-    
-                
-                if object.connections.updater then 
-                    object.connections.updater:Disconnect();
-                end;
-                
-                task.delay(0.1,function()
-                    task.wait(.1)
-                    object.drawing.label.Visible = false;
-                end);
-
+                object.Toggle = false
                 return;
             end;
-    
+            
+            object.Toggle = true
+            
+            if object.connections.updater then 
+                return;
+            end;
+
             object.connections.updater = RunService.Heartbeat:Connect(function(Time)
                 updater();
             end);
@@ -551,11 +551,19 @@
            ['name'] = Name or Instance.Name,
            ['uuid'] = 'uid_'..tostring(math.random(100000,1000000)),
            ['connections'] = {},
+           ['Toggle'] = false,
         };
         
         local function updater()
+            if not object.Toggle and object.connections.updater then 
+                object.connections.updater:Disconnect();
+                object.connections.updater = nil;
+                object.drawing.label.Visible = false;
+                return;
+            end;
+
             if not object.instance then return end;
-            
+                
             if not object.instance:FindFirstChild('HumanoidRootPart') or not object.instance:FindFirstChild('Humanoid') then 
                 return;
             end;
@@ -605,18 +613,16 @@
     
         function object.Enabled(value)
             if not value then 
-                if object.connections.updater then 
-                    object.connections.updater:Disconnect();
-                end;
-                
-                task.delay(0.1,function()
-                    task.wait(.1)
-                    object.drawing.label.Visible = false;
-                end);
-
+                object.Toggle = false
                 return;
             end;
-    
+            
+            object.Toggle = true
+            
+            if object.connections.updater then 
+                return;
+            end;
+
             object.connections.updater = RunService.Heartbeat:Connect(function(Time)
                 updater();
             end);
