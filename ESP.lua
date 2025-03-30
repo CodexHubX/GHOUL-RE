@@ -512,8 +512,11 @@
                     object.connections.updater:Disconnect();
                 end;
                 
-                task.wait(.1)
-                object.drawing.label.Visible = false;
+                task.delay(0.1,function()
+                    task.wait(.1)
+                    object.drawing.label.Visible = false;
+                end);
+
                 return;
             end;
     
@@ -606,8 +609,11 @@
                     object.connections.updater:Disconnect();
                 end;
                 
-                task.wait(.1)
-                object.drawing.label.Visible = false;
+                task.delay(0.1,function()
+                    task.wait(.1)
+                    object.drawing.label.Visible = false;
+                end);
+
                 return;
             end;
     
