@@ -384,10 +384,10 @@
              if rankValue > 0 then 
                 local rankdata = RankingData[Race] and RankingData[Race][rankValue]
                 if rankdata and rankdata.RankName then 
-                    object.drawing.rank_label.Text = "[Rank:"..tostring(rankValue) --.." "..tostring(rankdata.RankName).."]"
+                    object.drawing.rank_label.Text = "[Rank:"..tostring(rankValue).."]" --.." "..tostring(rankdata.RankName).."]"
                 end;
             else 
-                object.drawing.rank_label.Text = "[Rank 0 No Rank]"
+                object.drawing.rank_label.Text = "[Rank 0]"
              end;
 
              object.drawing.rank_label.Color = Settigs.rankColor
