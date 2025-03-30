@@ -479,7 +479,7 @@
             object.drawing.label.Color = settigs.Color;
     
             if settigs.ShowDistance then 
-                object.drawing.label.Text = tostring(object.name)..' ['..tostring(distance):split('.')[1]..' away]';
+                object.drawing.label.Text = '['..tostring(object.name)..']['..tostring(distance):split('.')[1]..' away]';
                 return;
             end;
     
@@ -502,14 +502,18 @@
     
         function object.Enabled(value)
             if not value then 
-                if not object.connections.updater then 
-                    object.drawing.label.Visible = false;
-                    return;
-                end;
+                -- if not object.connections.updater then 
+                --     object.drawing.label.Visible = false;
+                --     return;
+                -- end;
     
-                object.connections.updater:Disconnect();
+                
+                if object.connections.updater then 
+                    object.connections.updater:Disconnect();
+                end;
+                
+                task.wait(.1)
                 object.drawing.label.Visible = false;
-
                 return;
             end;
     
@@ -598,12 +602,11 @@
     
         function object.Enabled(value)
             if not value then 
-                if not object.connections.updater then 
-                    object.drawing.label.Visible = false;
-                    return;
+                if object.connections.updater then 
+                    object.connections.updater:Disconnect();
                 end;
-    
-                object.connections.updater:Disconnect();
+                
+                task.wait(.1)
                 object.drawing.label.Visible = false;
                 return;
             end;
