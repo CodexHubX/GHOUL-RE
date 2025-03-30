@@ -119,15 +119,21 @@
     })  
     
     function abbreviate_number(num)
-        local suffixes = { "", "K", "M", "B", "T" } 
-        local index = 1
-    
-        while num >= 1000 and index < #suffixes do
-            num = num / 1000
-            index = index + 1
-        end
-    
-        return string.format("%.1f%s", num, suffixes[index])
+        local var = 0
+
+        local su,er = pcall(function()
+            local suffixes = { "", "K", "M", "B", "T" } 
+            local index = 1
+        
+            while num >= 1000 and index < #suffixes do
+                num = num / 1000
+                index = index + 1
+            end
+        
+            var = string.format("%.1f%s", num, suffixes[index])
+        end);
+
+        return var
     end
 
     function CooldownFunc(key,time)
@@ -354,7 +360,7 @@
 
 
              if CooldownFunc(player.Name..'RC Update',10) then 
-                object.rcCells = pcall(abbreviate_number,tonumber(player.Character:GetAttribute('RCCells')))
+                object.rcCells = abbreviate_number(tonumber(player.Character:GetAttribute('RCCells')))
              end;
 
             --  object.drawing.race_label.Visible = Settigs.race;
