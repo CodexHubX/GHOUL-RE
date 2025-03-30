@@ -103,7 +103,7 @@
             Text.Visible = false
             Text.Center = true
             Text.Outline = true
-            Text.Font = 1
+            Text.Font = 4
             Text.Color = color
             Text.Size = size
             Text.Text = tostring(text)
@@ -354,7 +354,7 @@
 
 
              if CooldownFunc(player.Name..'RC Update',10) then 
-                object.rcCells = abbreviate_number(tonumber(player.Character:GetAttribute('RCCells')))
+                object.rcCells = pcall(abbreviate_number,tonumber(player.Character:GetAttribute('RCCells')))
              end;
 
             --  object.drawing.race_label.Visible = Settigs.race;
@@ -384,7 +384,7 @@
              if rankValue > 0 then 
                 local rankdata = RankingData[Race] and RankingData[Race][rankValue]
                 if rankdata and rankdata.RankName then 
-                    object.drawing.rank_label.Text = "[Rank:"..tostring(rankValue).." "..tostring(rankdata.RankName).."]"
+                    object.drawing.rank_label.Text = "[Rank:"..tostring(rankValue) --.." "..tostring(rankdata.RankName).."]"
                 end;
             else 
                 object.drawing.rank_label.Text = "[Rank 0 No Rank]"
@@ -447,7 +447,7 @@
            },
            ['class'] = 'Instance',
            ['drawing'] = {
-                label = asset.newtext('',Color3.fromRGB(255, 255, 255),15),
+                label = asset.newtext('',Color3.fromRGB(255, 255, 255),13),
            },
            ['instance'] = Instance,
            ['name'] = Name or Instance.Name,
@@ -532,7 +532,7 @@
            },
            ['class'] = 'Instance',
            ['drawing'] = {
-                label = asset.newtext('',Color3.fromRGB(255, 255, 255),15),
+                label = asset.newtext('',Color3.fromRGB(255, 255, 255),13),
            },
            ['instance'] = Instance,
            ['name'] = Name or Instance.Name,
@@ -565,10 +565,10 @@
             object.drawing.label.Color = settigs.Color;
             
             if settigs.ShowHealth and settigs.ShowDistance  then 
-                object.drawing.label.Text = '['..tostring(object.name)..']'..'['..tostring(object.instance.Humanoid.Health)..'/'..tostring(object.instance.Humanoid.MaxHealth)..']'
+                object.drawing.label.Text = '['..tostring(object.name)..']'..'['..tostring(math.floor(object.instance.Humanoid.Health))..'/'..tostring(math.floor(object.instance.Humanoid.MaxHealth))..']'
                 ..'['..tostring(math.floor(distance))..']'
             elseif settigs.ShowHealth and not settigs.ShowDistance then 
-                object.drawing.label.Text = '['..tostring(object.name)..']'..'['..tostring(object.instance.Humanoid.Health)..'/'..tostring(object.instance.Humanoid.MaxHealth)..']'
+                object.drawing.label.Text = '['..tostring(object.name)..']'..'['..tostring(math.floor(object.instance.Humanoid.Health))..'/'..tostring(math.floor(object.instance.Humanoid.MaxHealth))..']'
             elseif not settigs.ShowHealth and settigs.ShowDistance then 
                 object.drawing.label.Text = '['..tostring(object.name)..']'..'['..tostring(math.floor(distance))..']'
             elseif not settigs.ShowHealth and not settigs.ShowDistance then 
